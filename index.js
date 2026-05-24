@@ -4,8 +4,13 @@ const http = require('http');
 const path = require('path');
 const port = 3060;
 
+const { Server } = require("socket.io");
 
 const server = http.createServer(app);
+
+const io = new Server(server);
+
+
 
 
 // app.get('/', (req, res) => {
@@ -22,6 +27,12 @@ app.get('/test', (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname, 'client')));
+
+io.on("connection", (socket) => {
+  console.log("a user is connected"); 
+  
+});
+
 
 server.listen(port, () => {
     console.log(`listening on *:${port}`);
