@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 const io = new Server(server);
 
-
+const rooms = {};
 
 
 // app.get('/', (req, res) => {
@@ -29,11 +29,22 @@ app.get('/test', (req, res) => {
 app.use(express.static(path.join(__dirname, 'client')));
 
 io.on("connection", (socket) => {
-  console.log("a user is connected"); 
+  console.log(`a user ${socket.id} is connected`); 
 
-  
+   socket.on("createGame", () => {
+    console.log("createGame");
+    const roomUniqueId = makeid(12);
+    console.log(roomUniqueId);
+    rooms[roomUniqueId] = {};
+    //console.log(rooms);
+    socket.join(roomUniqueId);
+    socket.emit("newGame", { roomUniqueId: roomUniqueId });
+  });
+
+
+
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log(`user ${socket.id} is disconnected`);
   });
 
 });
@@ -42,3 +53,15 @@ io.on("connection", (socket) => {
 server.listen(port, () => {
     console.log(`listening on *:${port}`);
 });
+
+
+function makeid(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
