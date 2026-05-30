@@ -1,5 +1,6 @@
 console.log("client.js loaded");
 const socket = io();
+let roomUniqueId = null;
 
 function сreateGame() {
   console.log("createGame");
@@ -11,3 +12,8 @@ function joinGame() {
   socket.emit("joinGame", { roomUniqueId: roomUniqueId });
   console.log("joinGame " + roomUniqueId)
 }
+
+socket.on("newGame", (data) => {
+  roomUniqueId = data.roomUniqueId;
+  console.log("newGame " + roomUniqueId)
+});
