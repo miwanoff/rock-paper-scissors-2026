@@ -41,7 +41,14 @@ io.on("connection", (socket) => {
     socket.emit("newGame", { roomUniqueId: roomUniqueId });
   });
 
-
+  socket.on("joinGame", (data) => {
+    if (rooms[data.roomUniqueId] != null) {
+      socket.join(data.roomUniqueId);
+      socket.to(data.roomUniqueId).emit("playersConnected", {});
+      socket.emit("playersConnected");
+      console.log("playersConnected " + data.roomUniqueId)
+    }
+  });
 
   socket.on("disconnect", () => {
     console.log(`user ${socket.id} is disconnected`);

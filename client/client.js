@@ -9,4 +9,5 @@ function сreateGame() {
 function joinGame() {
   roomUniqueId = document.getElementById("roomUniqueId").value;
   socket.emit("joinGame", { roomUniqueId: roomUniqueId });
+  console.log("joinGame " + roomUniqueId)
 }
