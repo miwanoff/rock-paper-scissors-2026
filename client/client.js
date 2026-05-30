@@ -31,7 +31,8 @@ socket.on("newGame", (data) => {
       },
     );
   });
-  document.getElementById("waitingArea").appendChild(copyButton);
+
   document.getElementById("waitingArea").innerHTML =
     `Waiting for opponent, please share code ${roomUniqueId} to join`;
+  document.getElementById("waitingArea").appendChild(copyButton);
 });
