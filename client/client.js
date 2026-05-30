@@ -10,7 +10,7 @@ function сreateGame() {
 function joinGame() {
   roomUniqueId = document.getElementById("roomUniqueId").value;
   socket.emit("joinGame", { roomUniqueId: roomUniqueId });
-  console.log("joinGame " + roomUniqueId)
+  console.log("joinGame " + roomUniqueId);
 }
 
 socket.on("newGame", (data) => {
@@ -28,10 +28,10 @@ socket.on("newGame", (data) => {
       },
       function (err) {
         console.error("Async: Could not copy text: ", err);
-      }
+      },
     );
   });
-
-  document.getElementById('waitingArea').innerHTML = `Waiting for opponent, please share code ${roomUniqueId} to join`;
-
+  document.getElementById("waitingArea").appendChild(copyButton);
+  document.getElementById("waitingArea").innerHTML =
+    `Waiting for opponent, please share code ${roomUniqueId} to join`;
 });
