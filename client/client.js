@@ -15,5 +15,9 @@ function joinGame() {
 
 socket.on("newGame", (data) => {
   roomUniqueId = data.roomUniqueId;
-  console.log("newGame " + roomUniqueId)
+  console.log("newGame " + roomUniqueId);
+  document.getElementById("initial").style.display = "none";
+  document.getElementById("gamePlay").style.display = "block";
+  document.getElementById('waitingArea').innerHTML = `Waiting for opponent, please share code ${roomUniqueId} to join`;
+
 });
