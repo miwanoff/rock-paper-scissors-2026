@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="./style.css">
-    <script src="/socket.io/socket.io.js"></script>    
+    <script src="/socket.io/socket.io.js"></script>
     <script src="./client.js"></script>
 </head>
 
@@ -16,15 +16,24 @@
     <div id="initial">
         <button onclick="сreateGame()">Create Game</button>
         <div>or</div>
-        <input  placeholder="Enter Code" type="text" name="" id="roomUniqueId" />
+        <input placeholder="Enter Code" type="text" name="" id="roomUniqueId" />
         <button onclick="joinGame()">Join Game</button>
     </div>
     <div id="gamePlay" class="container">
-        <div id="waitingArea" >
+        <div id="waitingArea">
 
         </div>
-        <div id="gameArea"  style="display: none; border:solid 1px; width: 600px; height: 400px;;">
-            
+        <div id="gameArea" style="display: none; border:solid 1px; width: 400px; height: 200px;;">
+            You:
+            <div id="player1Choice">
+                <button class="rock" onclick="sendChoice('Rock')">Rock</button>
+                <button class="paper" onclick="sendChoice('Paper')">Paper</button>
+                <button class="scissor" onclick="sendChoice('Scissor')">Scissors</button>
+            </div>
+            Opponent:
+            <div id="player2Choice">
+                <p id="opponentState">Waiting for Opponent</p>
+            </div>
         </div>
         <div id="winnerArea">
 
