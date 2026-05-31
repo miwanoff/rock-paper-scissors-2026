@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const path = require("path");
-const port = 3060;
+// const port = 3060;
 
 const { Server } = require("socket.io");
 
@@ -71,8 +71,13 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`listening on *:${port}`);
+// server.listen(port, () => {
+//   console.log(`listening on *:${port}`);
+// });
+
+const PORT = process.env.PORT || 3060;
+server.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`);
 });
 
 function makeid(length) {
